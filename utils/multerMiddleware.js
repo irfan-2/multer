@@ -20,15 +20,7 @@ const uploadSimple = multer({dest: "/home/irfan/multer/uploads"})
 // storage, file filter, limits
 
 const uploadWithFeatures = multer({
-    storage: multer.diskStorage({
-        destination: "/home/irfan/multer/uploads",
-        filename: (req,file,cb) =>{
-            const ext = path.extname(file.originalname)  // .png, .jpeg, .webp
-            const  name = path.basename(file.originalname, ext)     // irfan, zia
-            const data = Date.now()         //current time
-            cb(null, `${Date}_${name}.${ext}`)
-        }
-    }),
+    storage: multer.memoryStorage(),
     fileFilter: (req,file,cb) =>{
         const ext = path.extname(file.originalname).toLowerCase()
         const mine = file.mimetype
